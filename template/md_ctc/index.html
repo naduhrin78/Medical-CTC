@@ -1,0 +1,96 @@
+{% extends 'md_ctc/base.html' %}
+{% load staticfiles %}
+{% block banner_block %}
+        <script>
+            window.onload = function() {
+            var pred = Number({{ scan_history.0.cancer }})*100;
+            console.log(pred);
+            var chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                title: {
+                    text: "Interveinal injection"
+                },
+                data: [{
+                    type: "pie",
+                    startAngle: 240,
+                    yValueFormatString: "##0.00\"%\"",
+                    indexLabel: "{label} {y}",
+                    dataPoints: [
+                        {y: pred, label: "Taken"},
+                        {y: 100-pred, label: "Not taken"},
+                    ]
+                }]
+            });
+            chart.render();
+
+            }
+    </script>
+        <section class="banner-area relative" id="home">
+            <div class="container">
+                    <div class="row fullscreen align-items-center justify-content-center">
+                        <div class="banner-content col-lg-6 col-md-12">
+                                {% if user.is_authenticated %}
+                                <form id="file-upload-form" method="post" action="." enctype="multipart/form-data" class="uploader">
+                                    {% csrf_token %}
+                                    <input id="file-upload" type="file" name="fileUpload" accept="image/*" />
+
+                                    <label for="file-upload" id="file-drag">
+                                        <img id="file-image" src="#" alt="Preview" class="hidden">
+                                        <div id="start">
+                                          <i class="fa fa-download" aria-hidden="true"></i>
+                                          <div>Select a file or drag here</div>
+                                          <div id="notimage" class="hidden">Please select an image</div>
+                                          <span id="file-upload-btn" class="btn btn-primary">Select a file</span>
+                                        </div>
+                                        <div id="response" class="hidden">
+                                          <div id="messages"></div>
+                                          <progress class="progress" id="file-progress" value="0">
+                                            <span>0</span>%
+                                          </progress>
+                                        </div>
+                                      </label>
+                                    <p>
+                                        Upload your CT scan and get to know if interveinal injection was taken or not.
+                                    </p>
+                                    <button type="submit" id="submit-button" class="primary-btn2 mt-20 text-uppercase ">Get Report<span class="lnr lnr-arrow-right"></span></button>
+                                </form>
+                                {% endif %}
+                        </div>
+                        <div class="col-lg-6 d-flex align-self-end img-right">
+                            <img class="img-fluid" src="{% static 'img/header-img.png' %}" alt="">
+                        </div>
+                    </div>
+            </div>
+        </section>
+{% endblock %}
+
+{% block user_history %}
+    <section class="about-area" id="result">
+                <div class="row d-flex justify-content-end align-items-center">
+                    <div class="col-lg-6 col-md-12 about-left no-padding">
+
+                        <!-- <img class="img-fluid" src="" alt=""> -->
+                        <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+                    </div>
+                    <div class="col-lg-6 col-md-12 about-right no-padding">
+                        <div class="wrap">
+    <table class="head">
+        <tr>
+            <td>History of verification</td>
+        </tr>
+    </table>
+    <div class="inner_table">
+        <table>
+            {% for scan in scan_history %}
+                <tr>
+                    <td><img width="64" height="64" class="rounded pull-left" src="{{ scan.ct_scan.url }}"/><br> {{ scan.created }} <i chance="{{ scan.cancer }}" style="margin-right: 10px;" class="fa-pull-right fa fa-line-chart pie-chart"></i></td>
+                </tr>
+            {% endfor %}
+    </table>
+    </div>
+</div>
+
+                    </div>
+                </div>
+        </section>
+{% endblock %}

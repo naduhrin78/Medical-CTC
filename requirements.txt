@@ -22,7 +22,7 @@ oauthlib==2.1.0
 Pillow==5.2.0
 protobuf==3.6.0
 psycopg2==2.7.5
-PyJWT==1.6.4
+PyJWT==2.4.0
 pyparsing==2.2.0
 python-dateutil==2.7.3
 python-social-auth==0.3.6
@@ -64,7 +64,7 @@ oauthlib==2.1.0
 Pillow==5.2.0
 protobuf==3.6.0
 psycopg2==2.7.5
-PyJWT==1.6.4
+PyJWT==2.4.0
 pyparsing==2.2.0
 python-dateutil==2.7.3
 python-social-auth==0.3.6

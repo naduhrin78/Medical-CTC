@@ -20,7 +20,7 @@ matplotlib==2.2.2
 numpy==1.15.0
 oauthlib==2.1.0
 Pillow==5.2.0
-protobuf==3.6.0
+protobuf==3.18.3
 psycopg2==2.7.5
 PyJWT==1.6.4
 pyparsing==2.2.0
@@ -62,7 +62,7 @@ matplotlib==2.2.2
 numpy==1.15.0
 oauthlib==2.1.0
 Pillow==5.2.0
-protobuf==3.6.0
+protobuf==3.18.3
 psycopg2==2.7.5
 PyJWT==1.6.4
 pyparsing==2.2.0
